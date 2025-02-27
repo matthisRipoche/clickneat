@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 @section('main')
-    <h1>Categories la vie de fou  le .yml y marche</h1>
+    <h1>Categories</h1>
 
     <a href="{{ route('categories.create') }}">Créer une catégorie</a>
 

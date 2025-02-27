@@ -3,7 +3,7 @@
 @section('main')
 <main class="content">
     <div class="container-fluid p-0">
-
+        <h1 class="h3 mb-3">Dashboard</h1>
         <div class="row">
             <div class="col-xl-6 col-xxl-5 d-flex">
                 <div class="w-100">
@@ -13,7 +13,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col mt-0">
-                                            <h5 class="card-title">ptn232</h5>
+                                            <h5 class="card-title">Sales</h5>
                                         </div>
 
                                         <div class="col-auto">
