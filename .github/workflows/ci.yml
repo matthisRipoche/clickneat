@@ -15,12 +15,23 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
             cd ${{ secrets.PROJECT_PATH }}
+
+            # Fix permissions for git pull
+            sudo chown -R $USER:$USER .git
             git config --global --add safe.directory ${{ secrets.PROJECT_PATH }}
             git pull
+
+            # Fix Laravel & Composer permissions
+            sudo chown -R $USER:$USER .
+            sudo chmod -R 775 storage bootstrap/cache
+
+            # Install dependencies
             composer install --no-dev --optimize-autoloader
             php artisan config:cache
             php artisan route:cache
             php artisan view:clear
             php artisan migrate --force
-            sudo systemctl restart supervisor
-            sudo systemctl restart php8.1-fpm
+
+            # Restart services (check correct PHP-FPM version)
+            sudo systemctl restart supervisor || echo "⚠️ Supervisor not found"
+            sudo systemctl restart php8.1-fpm || echo "⚠️ PHP-FPM 8.1 not found"
