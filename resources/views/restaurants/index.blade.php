@@ -5,7 +5,7 @@
 
     <a href="{{ route('restaurants.create') }}">Créer un restaurant</a>
 
-    <div class="main">
+    <main class="main">
         <div class="row">
             <div class="col-12 d-flex">
                 <div class="card flex-fill">

@@ -8,6 +8,7 @@ use App\Models\Restaurant;
 use App\Models\Category;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,5 +20,13 @@ class DatabaseSeeder extends Seeder
         Restaurant::factory(3)->create();
         Category::factory(12)->create();
         Item::factory(50)->create();
+
+        User::factory(
+            [
+                'name' => 'admin',
+                'email' => 'admin@admin.com',
+                'password' => Hash::make('password'),
+            ]
+        )->create();
     }
 }

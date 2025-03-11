@@ -5,33 +5,41 @@
 
     <a href="{{ route('categories.create') }}">Créer une catégorie</a>
 
-    <table border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nom</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($categories as $categorie)
-                <tr>
-                    <td>{{ $categorie->id }}</td>
-                    <td>{{ $categorie->name }}</td>
-                    <td>
-                        <div style="display: flex;">
-                            <a style="margin-right: 8px;" href="{{ route('categories.show', $categorie->id) }}">Voir</a>
-                            <a style="margin-right: 8px;" href="{{ route('categories.edit', $categorie->id) }}">Modifier</a>
-                            <form action="{{ route('categories.destroy', $categorie->id) }}" method="POST">
-                                @csrf
-                                @method('delete')
-                                <input type="hidden" name="id" value="{{ $categorie->id }}">
-                                <button type="submit">Supprimer</button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>    
+    <div class="main">
+        <div class="row">
+            <div class="col-12 d-flex">
+                <div class="card flex-fill">
+                    <table class="table table-hover my-0">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th class="d-none d-xl-table-cell">Nom</th>
+                                <th class="d-none d-xl-table-cell">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($categories as $category)
+                                <tr>
+                                    <td>{{ $category->id }}</td>
+                                    <td class="d-none d-xl-table-cell">{{ $category->name }}</td>
+                                    <td>
+                                        <div style="display: flex;">
+                                            <a style="margin-right: 8px;" href="{{ route('restaurants.show', $category->id) }}">Voir</a>
+                                            <a style="margin-right: 8px;" href="{{ route('restaurants.edit', $category->id) }}">Modifier</a>
+                                            <form action="{{ route('restaurants.destroy', $category->id) }}" method="POST">
+                                                @csrf
+                                                @method('delete')
+                                                <input type="hidden" name="id" value="{{ $category->id }}">
+                                                <button type="submit">Supprimer</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>  
 @endsection
