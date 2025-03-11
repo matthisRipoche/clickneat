@@ -9,14 +9,14 @@ class RestaurantController extends Controller
 {
     public function index()
     {
-        return view('restaurants.index', [
+        return view('dashboard.restaurants.index', [
             'restaurants' => Restaurant::all()
         ]);
     }
 
     public function create()
     {
-        return view('restaurants.create');
+        return view('dashboard.restaurants.create');
     }
 
     public function store(Request $request)
@@ -28,14 +28,14 @@ class RestaurantController extends Controller
 
     public function show($id)
     {
-        return view('restaurants.show', [
+        return view('dashboard.restaurants.show', [
             'restaurant' => Restaurant::findOrFail($id)
         ]);
     }
 
     public function edit($id)
     {
-        return view('restaurants.edit', [
+        return view('dashboard.restaurants.edit', [
             'restaurant' => Restaurant::findOrFail($id)
         ]);
     }

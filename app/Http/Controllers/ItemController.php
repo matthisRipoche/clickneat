@@ -10,14 +10,14 @@ class ItemController extends Controller
 {
     public function index()
     {
-        return view('items.index', [
+        return view('dashboard.items.index', [
             'items' => Item::with('category')->get()
         ]);
     }
 
     public function create()
     {
-        return view('items.create', [
+        return view('dashboard.items.create', [
             'categories' => Category::all()
         ]);
     }
@@ -37,7 +37,7 @@ class ItemController extends Controller
 
     public function edit($id)
     {
-        return view('items.edit', [
+        return view('dashboard.items.edit', [
             'item' => Item::findOrFail($id),
             'categories' => Category::all()
         ]);
@@ -56,7 +56,7 @@ class ItemController extends Controller
 
     public function show($id)
     {
-        return view('items.show', [
+        return view('dashboard.items.show', [
             'item' => Item::findOrFail($id),
             'categories' => Category::all()
         ]);

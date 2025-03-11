@@ -38,9 +38,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/items/{id}/edit', [ItemController::class, 'edit'])->name('items.edit');
     Route::put('/dashboard/items/{id}/update', [ItemController::class, 'update'])->name('items.update');
     Route::delete('/dashboard/items/{id}/destroy', [ItemController::class, 'destroy'])->name('items.destroy');
-});
 
-Route::middleware('auth')->group(function () {
+    //route pour Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

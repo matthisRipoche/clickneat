@@ -10,14 +10,14 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        return view('categories.index', [
+        return view('dashboard.categories.index', [
             'categories' => Category::with('restaurant')->get()
         ]);
     }
 
     public function create()
     {
-        return view('categories.create', [
+        return view('dashboard.categories.create', [
             'restaurants' => Restaurant::all()
         ]);
     }
@@ -35,7 +35,7 @@ class CategoryController extends Controller
 
     public function edit($id)
     {
-        return view('categories.edit', [
+        return view('dashboard.categories.edit', [
             'category' => Category::findOrFail($id),
             'restaurants' => Restaurant::all()
         ]);
@@ -54,7 +54,7 @@ class CategoryController extends Controller
 
     public function show(Request $request, $id)
     {
-        return view('categories.show', [
+        return view('dashboard.categories.show', [
             'category' => Category::findOrFail($id),
             'restaurants' => Restaurant::all()
         ]);
