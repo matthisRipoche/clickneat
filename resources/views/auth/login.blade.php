@@ -24,7 +24,7 @@
                                     @error('email')
                                         <div class="text-danger mt-2">{{ $message }}</div>
                                     @enderror
-                                </div>
+                                </div> 
                                 <div class="mb-3">
                                     <label class="form-label" for="password">Password</label>
                                     <input id="password" class="form-control form-control-lg"
