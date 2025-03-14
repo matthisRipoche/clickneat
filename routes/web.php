@@ -3,6 +3,8 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EntryController;
+use App\Http\Controllers\HomeManagerController;
+use App\Http\Controllers\HomeUserController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RestaurantController;
@@ -12,6 +14,14 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth')->group(function () {
 
     Route::get('/', [EntryController::class, 'index'])->name('entry.index');
+
+    Route::middleware('role:manager')->group(function () {
+        Route::get('/manager', [HomeManagerController::class, 'index'])->name('home_manager.index');
+    });
+
+    Route::middleware('role:user')->group(function () {
+        Route::get('/user', [HomeUserController::class, 'index'])->name('home_user.index');
+    });
 
     Route::middleware('role:admin')->group(function () {
 
