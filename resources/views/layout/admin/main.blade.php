@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 
-@include('layout.head')
+@include('layout.admin.head')
 
 <body>
 	<div class="wrapper">
-		@include('layout.sidebar')
+		@include('layout.admin.sidebar')
 
 		<div class="main">
-			@include('layout.topnav')
+			@include('layout.admin.topnav')
 
 			@yield('main')
 		</div>
 	</div>
 
-	<script src="{{ asset('js/app.js') }}"></script>
+	<script src="{{ asset('template-admin/js/app.js') }}"></script>
 
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
@@ -174,18 +174,3 @@
 </body>
 
 </html>
-
-
-
-
-{{--
-<!DOCTYPE html>
-<html lang="en">
-@include('layout.head')
-
-<body>
-    @yield('main')
-
-    @yield('scripts')
-</body>
-</html>--}}

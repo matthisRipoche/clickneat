@@ -11,6 +11,12 @@
                 </a>
             </li>
 
+            <li class="sidebar-item {{ request()->routeIs('users.*') ? 'active' : '' }}">
+                <a class="sidebar-link" href="{{ route('users.index') }}">
+                    <i class="align-middle" data-feather="users"></i> <span class="align-middle">Utilisateurs</span>
+                </a>
+            </li>
+
             <li class="sidebar-item {{ request()->routeIs('restaurants.*') ? 'active' : '' }}">
                 <a class="sidebar-link" href="{{ route('restaurants.index') }}">
                     <i class="align-middle" data-feather="coffee"></i> <span class="align-middle">Restaurants</span>
@@ -26,6 +32,11 @@
             <li class="sidebar-item {{ request()->routeIs('items.*') ? 'active' : '' }}">
                 <a class="sidebar-link" href="{{ route('items.index') }}">
                     <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Items</span>
+                </a>
+            </li>
+            <li class="sidebar-item {{ request()->routeIs('commandes.*') ? 'active' : '' }}">
+                <a class="sidebar-link" href="{{ route('commandes.index') }}">
+                    <i class="align-middle" data-feather="file-text"></i> <span class="align-middle">Commandes</span>
                 </a>
             </li>
 

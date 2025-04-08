@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-@include('layout.head')
+@include('layout.admin.head')
 
 <body>
 	<div class="wrapper">
@@ -11,7 +11,7 @@
 		</div>
 	</div>
 
-	<script src="{{ asset('js/app.js') }}"></script>
+	<script src="{{ asset('template-admin/js/app.js') }}"></script>
 
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {

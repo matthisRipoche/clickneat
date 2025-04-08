@@ -10,4 +10,9 @@ class HomeManagerController extends Controller
     {
         return view('manager.index');
     }
+
+    public function createRestaurant()
+    {
+        return view('manager.createRestaurant');
+    }
 }

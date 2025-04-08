@@ -46,6 +46,6 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         // Rediriger un utilisateur vers une page par défaut
-        return redirect()->route('/');
+        return redirect()->route('entry.index');
     }
 }
