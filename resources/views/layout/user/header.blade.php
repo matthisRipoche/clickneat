@@ -72,15 +72,19 @@
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="{{ route('home_user.cart') }}"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <li>
+                                <a class="d-flex align-items-center" href="{{ route('home_user.cart') }}">
+                                    <i class="fa fa-shopping-bag"></i>
+                                    <span>{{ $cart ? $cart->orderItems->count() : 0 }}</span>
+                                </a>
+                            </li>
                         </ul>
-                        <div class="header__cart__price">item: <span>$150.00</span></div>
                     </div>
                 </div>
 
                 <form action="{{ route('logout') }}" method="POST" class="col-lg-1 m-auto">
                     @csrf
-                    <button type="submit" class="btn btn-primary">Logout</button>
+                    <button type="submit" class="site-btn d-block">Logout</button>
                 </form>
             </div>
             <div class="humberger__open">

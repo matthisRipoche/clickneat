@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('restaurant_id')->constrained()->onDelete('cascade');
             $table->unsignedInteger('total_price'); // prix en centimes
             $table->dateTime('reserved_at')->nullable();
-            $table->enum('status', ['en attente', 'en cours', 'terminée', 'annulée'])->default('en attente');
+            $table->enum('status', ['cart', 'waiting', 'in_progress', 'finished', 'canceled'])->default('cart');
             $table->timestamps();
         });
     }

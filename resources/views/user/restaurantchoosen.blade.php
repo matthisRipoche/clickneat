@@ -43,9 +43,17 @@
                                     <div class="featured__item">
                                         <div class="featured__item__pic set-bg" data-setbg="{{ asset('template-users/img/featured/feature-1.jpg') }}">
                                             <ul class="featured__item__pic__hover">
-                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                                <li>
+                                                <form action="{{ route('cart.addItemToCart') }}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="item_id" value="{{ $item->id }}">
+                                                    <input type="hidden" name="restaurant_id" value="{{ $selectedRestaurant->id }}">
+                                                    <input type="hidden" name="quantity" value="1">
+                                                    <button type="submit" class="btn btn-primary">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                    </button>
+                                                </form>
+                                            </li>
                                             </ul>
                                         </div>
                                         <div class="featured__item__text">

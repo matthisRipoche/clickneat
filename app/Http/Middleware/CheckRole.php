@@ -16,8 +16,12 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next, string $role): Response
     {
-        if (!Auth::check() || Auth::user()->role !== $role) {
-            abort(403, 'Access denied');
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
+        if (Auth::user()->role !== $role) {
+            return redirect()->route('entry.index')->with('error', 'Vous n\'avez pas accès à cette page');
         }
         return $next($request);
     }

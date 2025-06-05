@@ -24,7 +24,7 @@ class OrderFactory extends Factory
             'restaurant_id' => $restaurant->id,
             'total_price' => 0,
             'reserved_at' => $this->faker->dateTimeBetween('now', '+1 month'),
-            'status' => $this->faker->randomElement($statuses),
+            'status' => 'terminée',
         ];
     }
 }

@@ -1,34 +1,81 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\EntryController;
-use App\Http\Controllers\HomeManagerController;
-use App\Http\Controllers\HomeUserController;
-use App\Http\Controllers\ItemController;
-use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RestaurantController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\EntryController;
+
+use App\Http\Controllers\user\HomeUserController;
+use App\Http\Controllers\user\CartController;
+use App\Http\Controllers\user\StripeCheckoutController;
+
+use App\Http\Controllers\manager\HomeManagerController;
+use App\Http\Controllers\manager\ManagerCategoryController;
+use App\Http\Controllers\manager\ManagerItemController;
+use App\Http\Controllers\manager\ManagerOrderController;
+
+use App\Http\Controllers\admin\OrderController;
+use App\Http\Controllers\admin\RestaurantController;
+use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\admin\ItemController;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/', [EntryController::class, 'index'])->name('entry.index');
+    Route::get('/', [EntryController::class, 'checkRole'])->name('entry.index');
 
     Route::middleware('role:user')->group(function () {
         Route::get('/user', [HomeUserController::class, 'index'])->name('home_user.index');
         Route::get('/user/restaurants-{id}', [HomeUserController::class, 'restaurantchoosen'])->name('home_user.restaurantchoosen');
         Route::get('/user/cart', [HomeUserController::class, 'cart'])->name('home_user.cart');
-    });
 
+
+        Route::post('/cart/add', [CartController::class, 'addItemToCart'])->name('cart.addItemToCart');
+        Route::delete('/cart/remove/{id}', [CartController::class, 'removeItemFromCart'])->name('cart.removeItemFromCart');
+        Route::put('/cart/increment/{id}', [CartController::class, 'incrementQuantity'])->name('cart.incrementQuantity');
+        Route::put('/cart/decrement/{id}', [CartController::class, 'decrementQuantity'])->name('cart.decrementQuantity');
+        Route::delete('/cart/reset', [CartController::class, 'resetCart'])->name('cart.reset');
+        Route::post('/cart/checkout', [CartController::class, 'CartToOrder'])->name('cart.checkout');
+
+        Route::post('/user/cart/create-checkout-session', [StripeCheckoutController::class, 'createCheckoutSession']);
+        Route::get('/checkout/success', [StripeCheckoutController::class, 'success'])->name('cart.checkout.success');
+        Route::get('/checkout/cancel', [StripeCheckoutController::class, 'cancel'])->name('cart.checkout.cancel');
+    });
 
     Route::middleware('role:manager')->group(function () {
-        Route::get('/manager', [HomeManagerController::class, 'index'])->name('home_manager.index');
-        Route::get('/manager/createRestaurant', [HomeManagerController::class, 'createRestaurant'])->name('home_manager.createRestaurant');
-    });
+        Route::get('/manager', [HomeManagerController::class, 'index'])->name('manager.index');
+        Route::get('/manager/createRestaurant', [HomeManagerController::class, 'createRestaurant'])->name('manager.createRestaurant');
+        Route::post('/manager/createRestaurant', [HomeManagerController::class, 'storeRestaurant'])->name('manager.storeRestaurant');
 
+        //route pour Category
+        Route::get('/manager/categories', [ManagerCategoryController::class, 'index'])->name('manager.categories.index');
+        Route::get('/manager/categories/{id}/show', [ManagerCategoryController::class, 'show'])->name('manager.categories.show');
+        Route::get('/manager/categories/create', [ManagerCategoryController::class, 'create'])->name('manager.categories.create');
+        Route::post('/manager/categories', [ManagerCategoryController::class, 'store'])->name('manager.categories.store');
+        Route::get('/manager/categories/{id}/edit', [ManagerCategoryController::class, 'edit'])->name('manager.categories.edit');
+        Route::put('/manager/categories/{id}/update', [ManagerCategoryController::class, 'update'])->name('manager.categories.update');
+        Route::delete('/manager/categories/{id}/destroy', [ManagerCategoryController::class, 'destroy'])->name('manager.categories.destroy');
+
+        //route pour Item
+        Route::get('/manager/items', [ManagerItemController::class, 'index'])->name('manager.items.index');
+        Route::get('/manager/items/{id}/show', [ManagerItemController::class, 'show'])->name('manager.items.show');
+        Route::get('/manager/items/create', [ManagerItemController::class, 'create'])->name('manager.items.create');
+        Route::post('/manager/items', [ManagerItemController::class, 'store'])->name('manager.items.store');
+        Route::get('/manager/items/{id}/edit', [ManagerItemController::class, 'edit'])->name('manager.items.edit');
+        Route::put('/manager/items/{id}/update', [ManagerItemController::class, 'update'])->name('manager.items.update');
+        Route::delete('/manager/items/{id}/destroy', [ManagerItemController::class, 'destroy'])->name('manager.items.destroy');
+
+        //route pour Commandes
+        Route::get('/manager/commandes', [ManagerOrderController::class, 'index'])->name('manager.commandes.index');
+        Route::get('/manager/commandes/{id}/show', [ManagerOrderController::class, 'show'])->name('manager.commandes.show');
+        Route::get('/manager/commandes/create', [ManagerOrderController::class, 'create'])->name('manager.commandes.create');
+        Route::post('/manager/commandes', [ManagerOrderController::class, 'store'])->name('manager.commandes.store');
+        Route::get('/manager/commandes/{id}/edit', [ManagerOrderController::class, 'edit'])->name('manager.commandes.edit');
+        Route::put('/manager/commandes/{id}/update', [ManagerOrderController::class, 'update'])->name('manager.commandes.update');
+        Route::delete('/manager/commandes/{id}/destroy', [ManagerOrderController::class, 'destroy'])->name('manager.commandes.destroy');
+    });
 
     Route::middleware('role:admin')->group(function () {
 

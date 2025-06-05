@@ -7,10 +7,7 @@
             <div class="d-table-cell align-middle">
 
                 <div class="text-center mt-4">
-                    <h1 class="h2">Get started</h1>
-                    <p class="lead">
-                        Start creating the best possible user experience for your customers.
-                    </p>
+                    <h1 class="h2">Create an account</h1>
                 </div>
 
                 <div class="card">
@@ -51,6 +48,19 @@
                                     <label class="form-label" for="password_confirmation">Confirm Password</label>
                                     <input class="form-control form-control-lg" type="password" id="password_confirmation" name="password_confirmation" placeholder="Enter password" required />
                                     @error('password_confirmation')
+                                        <div class="text-danger mt-2">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <!-- Role -->
+                                <div class="mb-3">
+                                    <label class="form-label" for="role">Role</label>
+                                    <select class="form-select form-select-lg" id="role" name="role" required>
+                                        <option value="user">Client</option>
+                                        <option value="manager">Manager</option>
+                                        <option value="admin">Admin</option>
+                                    </select>
+                                    @error('role')
                                         <div class="text-danger mt-2">{{ $message }}</div>
                                     @enderror
                                 </div>

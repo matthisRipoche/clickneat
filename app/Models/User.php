@@ -51,4 +51,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
+
+    public function currentOrder()
+    {
+        return $this->belongsTo(Order::class, 'current_order_id');
+    }
 }
