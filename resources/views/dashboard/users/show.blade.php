@@ -5,7 +5,6 @@
 
     <p>
         <a href="{{ route('users.index') }}">⬅️ Retour à la liste</a>
-        <a href="#" class="btn btn-primary">➕ Créer un utilisateur</a>
     </p>
 
     <main class="main">
@@ -60,7 +59,7 @@
                             <ul class="list-unstyled">
                                 @foreach($user->orders as $order)
                                     <li>
-                                        👉 <a href="{{ route('commandes.show', $order->id) }}">{{ $order->name }}</a>
+                                        <a href="{{ route('commandes.show', $order->id) }}">{{ $order->name }}</a>
                                     </li>
                                 @endforeach
                             </ul>

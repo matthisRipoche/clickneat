@@ -8,7 +8,7 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\Checkout\Session;
-
+use Illuminate\Support\Facades\Auth;
 
 class StripeCheckoutController extends Controller
 {
@@ -47,7 +47,7 @@ class StripeCheckoutController extends Controller
                     'product_data' => [
                         'name' => $cart_name,
                     ],
-                    'unit_amount' => $cart_price, // ⚠️ en centimes (ex: 1000 = 10€)
+                    'unit_amount' => $cart_price,
                 ],
                 'quantity' => 1,
             ]],
@@ -63,11 +63,26 @@ class StripeCheckoutController extends Controller
 
     public function success(Request $request)
     {
-        $cart = Order::where('status', 'cart')->first();
-        return view('user.stripe.success', [
-            'cart' => $cart
-        ]);
+        $user = Auth::user();
+
+        // Récupère la commande "cart" de l'utilisateur
+        $order = Order::where('user_id', $user->id)
+            ->where('status', 'cart')
+            ->first();
+
+        // Vérifie qu'on a bien une commande à valider
+        if (!$order) {
+            return redirect()->route('home_user.index')->with('error', 'Aucune commande trouvée à valider.');
+        }
+
+        // Met à jour le statut de la commande
+        $order->status = 'finished';
+        $order->reserved_at = now();
+        $order->save();
+
+        return redirect()->route('home_user.index')->with('success', 'Commande validée avec succès.');
     }
+
 
     public function cancel(Request $request)
     {

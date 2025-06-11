@@ -26,13 +26,12 @@
                                     <td class="d-none d-xl-table-cell">{{ $commande->name }}</td>
                                     <td class="d-none d-xl-table-cell">{{ $commande->user->name }}</td>
                                     <td class="d-none d-xl-table-cell">{{ $commande->reserved_at }}</td>
-                                    <td class="d-none d-xl-table-cell">{{ $commande->total_price }}</td>
+                                    <td class="d-none d-xl-table-cell">{{ $commande->total_price / 100 }} €</td>
                                     <td class="d-none d-xl-table-cell">{{ $commande->status }}</td>
                                     <td>
                                         <div style="display: flex;">
                                             <a style="margin-right: 8px;" href="{{ route('manager.commandes.show', $commande->id) }}">Voir</a>
-                                            <a style="margin-right: 8px;" href="#">Modifier</a>
-
+                                            <a style="margin-right: 8px;" href="{{ route('manager.commandes.edit', $commande->id) }}">Modifier</a>
                                         </div>
                                     </td>
                                 </tr>

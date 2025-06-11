@@ -26,6 +26,7 @@ class ItemFactory extends Factory
             'category_id' => random_int(1, 12),
             'price' => random_int(100, 1000),
             'cost' => random_int(50, 500),
+            'is_active' => true,
         ];
     }
 }

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('restaurant_id')->constrained()->onDelete('cascade');
-            $table->unsignedInteger('total_price'); // prix en centimes
+            $table->unsignedInteger('total_price');
             $table->dateTime('reserved_at')->nullable();
             $table->enum('status', ['cart', 'waiting', 'in_progress', 'finished', 'canceled'])->default('cart');
             $table->timestamps();

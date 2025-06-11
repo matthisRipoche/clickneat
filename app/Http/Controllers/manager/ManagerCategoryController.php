@@ -64,11 +64,12 @@ class ManagerCategoryController extends Controller
         return redirect()->route('manager.categories.index');
     }
 
-    public function show(Request $request, $id)
+    public function show($id)
     {
+        $category = Category::findOrFail($id);
         return view('manager.categories.show', [
-            'category' => Category::findOrFail($id),
-            'restaurant' => Restaurant::where('id', $id)->get()->first()
+            'category' => $category,
+            'restaurant' => Restaurant::where('id', $category->restaurant_id)->get()->first()
         ]);
     }
 

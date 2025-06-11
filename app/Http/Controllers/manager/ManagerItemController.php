@@ -73,6 +73,7 @@ class ManagerItemController extends Controller
         $item->category_id = $request->get('category_id');
         $item->price = $request->get('price');
         $item->cost = $request->get('cost');
+        $item->is_active = $request->get('is_active') ? 1 : 0;
         $item->save();
 
         return redirect()->route('manager.items.index');
@@ -80,9 +81,13 @@ class ManagerItemController extends Controller
 
     public function show($id)
     {
+        $item = Item::findOrFail($id);
+        $category = $item->category;
+        $restaurant = $category->restaurant;
         return view('manager.items.show', [
-            'item' => Item::findOrFail($id),
-            'categories' => Category::all()
+            'item' => $item,
+            'category' => $category,
+            'restaurant' => $restaurant
         ]);
     }
 
@@ -91,6 +96,6 @@ class ManagerItemController extends Controller
         if ($request->get('id') == $id) {
             Item::destroy($id);
         }
-        return redirect()->route('manager.items.sindex');
+        return redirect()->route('manager.items.index');
     }
 }

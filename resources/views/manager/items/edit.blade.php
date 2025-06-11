@@ -5,7 +5,7 @@
 
     <a href="{{ route('manager.items.index') }}">Retour à la liste</a>
 
-    <form action="{{ route('items.update', $item->id) }}" method="POST">
+    <form action="{{ route('manager.items.update', $item->id) }}" method="POST">
         @csrf
         @method('put')
         <div>
@@ -32,6 +32,10 @@
                     @endif
                 @endforeach
             </select>
+        </div>
+        <div>
+            <label for="is_active">Actif ?</label>
+            <input type="checkbox" id="is_active" name="is_active" value="1" {{ $item->is_active ? 'checked' : '' }}>
         </div>
 
         <button type="submit">Envoyer</button>

@@ -16,6 +16,7 @@
                                 <th class="d-none d-xl-table-cell">Nom</th>
                                 <th class="d-none d-xl-table-cell">Category</th>
                                 <th class="d-none d-xl-table-cell">Restaurant</th>
+                                <th class="d-none d-xl-table-cell">Prix</th>
                                 <th class="d-none d-xl-table-cell">Actif ?</th>
                                 <th class="d-none d-xl-table-cell">Action</th>
                             </tr>
@@ -27,7 +28,8 @@
                                     <td class="d-none d-xl-table-cell">{{ $item->name }}</td>
                                     <td class="d-none d-xl-table-cell">{{ $item->category->name }}</td>
                                     <td class="d-none d-xl-table-cell">{{ $item->category->restaurant->name }}</td>
-                                    <td class="d-none d-xl-table-cell">{{ $item->active ? 'Oui' : 'Non' }}</td>
+                                    <td class="d-none d-xl-table-cell">{{ $item->price/100 }}€</td>
+                                    <td class="d-none d-xl-table-cell">{{ $item->is_active ? 'Oui' : 'Non' }}</td>
                                     <td>
                                         <div style="display: flex;">
                                             <a style="margin-right: 8px;" href="{{ route('manager.items.show', $item->id) }}">Voir</a>
