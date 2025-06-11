@@ -16,15 +16,8 @@ jobs:
           port: 4321
           script: |
             cd ${{ secrets.PROJECT_PATH }}
-
-            # Corriger les permissions des dossiers critiques
-            sudo chown -R www-data:www-data storage bootstrap/cache
-            sudo chmod -R 775 storage bootstrap/cache
-
-            # Continuer avec le reste du déploiement
-            git pull
-            composer install --no-dev --optimize-autoloader
-            php artisan config:cache
-            php artisan route:cache
-            php artisan view:clear
-            php artisan migrate --force
+            sudo git pull
+            sudo composer install
+            sudo php artisan config:cache
+            sudo php artisan route:cache
+            sudo php artisan migrate:fresh --seed --force
