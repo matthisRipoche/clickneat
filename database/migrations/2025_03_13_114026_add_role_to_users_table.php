@@ -16,6 +16,7 @@ return new class extends Migration {
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('role');
+            $table->foreign('restaurant_id')->references('id')->on('restaurants')->cascadeOnDelete();
         });
     }
 };
